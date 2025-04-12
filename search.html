@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>VoluNet - Search</title>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Radio+Canada+Big:ital,wght@0,400..700;1,400..700&family=Six+Caps&display=swap"
+    rel="stylesheet"
+  />
+  <!-- Font Awesome for icons -->
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    integrity="sha512-mA6YOrq6kkYJYJfA6nk9SQ0Qox08TE0sh+V/+MzR8oOrOCBWxJN/LiTrqgS6HZLVv6fHI6YZ0CITNuLrDCTygw=="
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+  />
+
+  <style>
+    /* ---------- Base & Body Styles ---------- */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Radio Canada Big', sans-serif;
+      background: #000;
+      color: white;
+      line-height: 1.6;
+    }
+    
+    /* ---------- Navbar Container ---------- */
+    .navbar-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      background-color: #000;
+      padding: 10px 20px;
+      box-sizing: border-box;
+      position: relative;
+    }
+    .navigation {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-grow: 1;
+      gap: 20px;
+    }
+    .navigation a {
+      color: white;
+      text-decoration: none;
+      font-size: 17px;
+      padding: 8px;
+      font-family: 'Six Caps', sans-serif;
+      transition: color 0.3s ease;
+    }
+    .navigation a:hover {
+      color: #aaa;
+    }
+    .navigation a.active {
+      border-bottom: 2px solid white;
+    }
+    .welcome-text-container {
+      flex-shrink: 0;
+    }
+    .welcome-text {
+      font-family: 'Six Caps', sans-serif;
+      color: white;
+      padding-right: 20px;
+      text-align: right;
+    }
+    
+    /* ---------- Header ---------- */
+    .header {
+      background: url('https://cellius-1.github.io/thernel.github.io/images/pi.png') center/cover no-repeat;
+      height: 20vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      position: relative;
+      max-width: 70%;
+      margin: 0 auto;
+    }
+    .header h1 {
+      font-size: 3em;
+      color: white;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+      font-family: 'Six Caps', sans-serif;
+      animation: slideIn 1s ease-in-out forwards;
+    }
+    @keyframes slideIn {
+      0% { opacity: 0; transform: translateY(-20px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+    
+    /* ---------- Hero Banner Section ---------- */
+    .hero {
+      position: relative;
+      height: 60vh;
+      background: url('https://fjwp.s3.amazonaws.com/blog/wp-content/uploads/2020/10/15153848/The-Career-Benefits-of-Volunteering-During-Your-Job-Search-2.jpg') center/cover no-repeat;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0,0,0,0.6);
+    }
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      max-width: 800px;
+      padding: 20px;
+      animation: fadeIn 2s ease-out forwards;
+    }
+    .hero-content h1 {
+      font-size: 3.5em;
+      font-family: 'Six Caps', sans-serif;
+      margin-bottom: 10px;
+      color: #ffcc80;
+    }
+    .hero-content p {
+      font-size: 1.5em;
+      color: #ddd;
+    }
+    @keyframes fadeIn {
+      0% { opacity: 0; transform: translateY(-20px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+    
+    /* ---------- Feature Description Section ---------- */
+    .features-section {
+      background: #111;
+      padding: 40px 20px;
+    }
+    .features-section h2 {
+      text-align: center;
+      font-family: 'Six Caps', sans-serif;
+      font-size: 2.5em;
+      margin-bottom: 20px;
+      color: #ffcc80;
+    }
+    .features-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .feature-card {
+      background: rgba(255,255,255,0.1);
+      border-radius: 10px;
+      padding: 20px;
+      text-align: center;
+      transition: transform 0.3s ease;
+    }
+    .feature-card:hover {
+      transform: translateY(-5px);
+    }
+    .feature-card i {
+      font-size: 3em;
+      margin-bottom: 15px;
+      color: #ffa726;
+      transition: transform 0.3s ease;
+    }
+    .feature-card i:hover {
+      transform: scale(1.1);
+    }
+    .feature-card h3 {
+      font-family: 'Six Caps', sans-serif;
+      font-size: 1.8em;
+      margin-bottom: 10px;
+      color: #ffcc80;
+    }
+    .feature-card p {
+      font-size: 1em;
+      color: #ccc;
+    }
+    
+    /* ---------- Main Container (Filter & Events) ---------- */
+    .main-container {
+      max-width: 1200px;
+      margin: 20px auto;
+      padding: 20px;
+    }
+    
+    /* ---------- Filter Section ---------- */
+    .filter-section {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+    .filter-section input,
+    .filter-section select {
+      padding: 10px;
+      border-radius: 5px;
+      border: none;
+      font-size: 16px;
+      width: 220px;
+      background: rgba(255,255,255,0.1);
+      color: #fff;
+      outline: none;
+      font-family: 'Radio Canada Big', sans-serif;
+    }
+    .filter-section input::placeholder {
+      color: #ddd;
+    }
+    .filter-section select {
+      background: #222;
+      color: #eee;
+    }
+    .filter-section select option {
+      background: #222;
+      color: #eee;
+    }
+    .filter-section button {
+      padding: 10px 20px;
+      border: 2px solid white;
+      border-radius: 5px;
+      background: transparent;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+      font-family: 'Six Caps', sans-serif;
+      transition: background 0.3s ease, color 0.3s ease;
+    }
+    .filter-section button:hover {
+      background: white;
+      color: black;
+    }
+    
+    /* ---------- Events Container ---------- */
+    .events-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 20px;
+      width: 100%;
+      margin-top: 20px;
+    }
+    .event-box {
+      background: rgba(255,255,255,0.1);
+      border-radius: 10px;
+      padding: 20px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      font-family: 'Radio Canada Big', sans-serif;
+    }
+    .event-box:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+    }
+    .event-box h2 {
+      font-size: 1.8em;
+      margin-bottom: 10px;
+      color: #ffcc80;
+      font-family: 'Six Caps', sans-serif;
+    }
+    .event-box p {
+      margin-bottom: 5px;
+    }
+    .event-box p i {
+      margin-right: 5px;
+      color: #ffa726;
+    }
+    .map-container {
+      margin-top: 15px;
+      width: 100%;
+      height: 200px;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+    }
+    
+    /* ---------- AI Volunteer Advisor Section ---------- */
+    .ai-section {
+      background: #1a1a1a;
+      padding: 40px 20px;
+      text-align: center;
+      margin-top: 40px;
+    }
+    .ai-section h2 {
+      font-family: 'Six Caps', sans-serif;
+      font-size: 2.8em;
+      color: #ffcc80;
+      margin-bottom: 10px;
+    }
+    .ai-section p {
+      font-size: 1.2em;
+      color: #ccc;
+      margin-bottom: 20px;
+    }
+    .ai-section input[type="text"] {
+      width: 300px;
+      padding: 10px;
+      border-radius: 5px;
+      border: none;
+      background: rgba(255,255,255,0.2);
+      color: white;
+      font-family: 'Radio Canada Big', sans-serif;
+      margin-right: 10px;
+      transition: background 0.3s ease;
+    }
+    .ai-section input[type="text"]:focus {
+      background: rgba(255,255,255,0.3);
+    }
+    .ai-section button {
+      padding: 10px 20px;
+      border: 2px solid white;
+      border-radius: 5px;
+      background: transparent;
+      color: white;
+      font-family: 'Six Caps', sans-serif;
+      cursor: pointer;
+      transition: background 0.3s ease, color 0.3s ease;
+    }
+    .ai-section button:hover {
+      background: white;
+      color: black;
+    }
+    .ai-response {
+      margin-top: 20px;
+      font-size: 1.1em;
+      color: #ccc;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+      text-align: left;
+    }
+    
+    /* ---------- Call-To-Action (CTA) Section for Volunteers ---------- */
+    .cta-section {
+      background: #1a1a1a;
+      padding: 40px 20px;
+      text-align: center;
+      margin-top: 40px;
+    }
+    .cta-content {
+      max-width: 800px;
+      margin: 0 auto;
+      animation: fadeIn 2s ease-out forwards;
+    }
+    .cta-content h2 {
+      font-family: 'Six Caps', sans-serif;
+      font-size: 2.8em;
+      margin-bottom: 10px;
+      color: #ffcc80;
+    }
+    .cta-content p {
+      font-size: 1.2em;
+      color: #ccc;
+      margin-bottom: 20px;
+    }
+    .cta-button {
+      padding: 15px 30px;
+      border: 2px solid white;
+      border-radius: 5px;
+      background: transparent;
+      color: white;
+      font-family: 'Six Caps', sans-serif;
+      font-size: 18px;
+      cursor: pointer;
+      transition: background 0.3s ease, color 0.3s ease;
+    }
+    .cta-button:hover {
+      background: white;
+      color: black;
+    }
+    
+    /* ---------- Footer ---------- */
+    .footer {
+      text-align: center;
+      padding: 15px 20px;
+      background: #000;
+      font-size: 14px;
+      color: #ccc;
+      margin-top: 40px;
+    }
+    
+    /* ---------- Media Queries ---------- */
+    @media (max-width: 768px) {
+      .navigation { gap: 10px; }
+      .filter-section { flex-direction: column; }
+      .hero-content h1 { font-size: 2.5em; }
+    }
+  </style>
+  
+  <script>
+    // Navigate to "serviceOpportunity.html" when "Request Volunteers" is clicked.
+    function createServiceOpportunity(event) {
+      event.preventDefault();
+      window.location.href = "serviceOpportunity.html";
+    }
+    
+    // Reset events: remove "serviceData" from localStorage and reload page.
+    function resetEvents() {
+      if (confirm("Are you sure you want to reset all event data?")) {
+        localStorage.removeItem("serviceData");
+        location.reload();
+      }
+    }
+    
+    // On DOMContentLoaded, update welcome text, compute dynamic live trends,
+    // load event data (reverse order, remove last three events) and render.
+    document.addEventListener("DOMContentLoaded", function() {
+      var username = localStorage.getItem("username");
+      if (username) {
+        document.getElementById("welcomeText").textContent = "Welcome, " + username;
+      }
+      
+      // Compute dynamic live trends.
+      var serviceData = JSON.parse(localStorage.getItem("serviceData")) || [];
+      var today = new Date();
+      today.setHours(0, 0, 0, 0);
+      var total = serviceData.length;
+      var upcoming = serviceData.filter(function(item) {
+        var itemDate = new Date(item.date);
+        itemDate.setHours(0, 0, 0, 0);
+        return itemDate >= today;
+      }).length;
+      var completed = total - upcoming;
+      if (document.getElementById("totalRequests")) {
+        document.getElementById("totalRequests").textContent = total;
+      }
+      if (document.getElementById("upcomingRequests")) {
+        document.getElementById("upcomingRequests").textContent = upcoming;
+      }
+      if (document.getElementById("pastRequests")) {
+        document.getElementById("pastRequests").textContent = completed;
+      }
+      
+      // Load event data.
+      var data = serviceData;
+      var eventsContainer = document.getElementById("eventsContainer");
+      if (eventsContainer) {
+        if (data.length > 0) {
+          data.reverse();
+          // Remove the last three events from the reversed list.
+          for (var i = 0; i < 3 && data.length > 0; i++) {
+            data.pop();
+          }
+          eventsContainer.innerHTML = data.map(function(item) {
+            return `
+              <div class="event-box">
+                <h2>${item.name}</h2>
+                <p><i class="fas fa-map-marker-alt"></i> ${item.address}</p>
+                <p><i class="fas fa-clock"></i> ${item.time}</p>
+                <p><i class="fas fa-calendar-alt"></i> ${item.date}</p>
+                <p>${item.description}</p>
+                <div class="map-container">
+                  <iframe class="map"
+                          width="100%"
+                          height="100%"
+                          style="border:0;"
+                          loading="lazy"
+                          allowfullscreen
+                          referrerpolicy="no-referrer-when-downgrade"
+                          src="https://www.google.com/maps/embed/v1/place?key=AIzaSyCHJTgseMnVwDvJyvKCQXjPlUCvPhDS8X0&q=${encodeURI(item.address)}">
+                  </iframe>
+                </div>
+              </div>`;
+          }).join("");
+        } else {
+          eventsContainer.innerHTML = "<p style='text-align:center;color:#aaa;'>No service opportunities found.</p>";
+        }
+      }
+    });
+    
+    // Filter events by name/address and sort by date or time.
+    function applyFilters() {
+      var searchTerm = document.getElementById("searchTerm").value.toLowerCase();
+      var sortOption = document.getElementById("sortOption").value;
+      var data = JSON.parse(localStorage.getItem("serviceData")) || [];
+      if (searchTerm) {
+        data = data.filter(function(item) {
+          return item.name.toLowerCase().includes(searchTerm) ||
+                 item.address.toLowerCase().includes(searchTerm);
+        });
+      }
+      if (sortOption) {
+        data.sort(function(a, b) {
+          if (sortOption === "date") {
+            return new Date(a.date) - new Date(b.date);
+          } else if (sortOption === "time") {
+            return a.time.localeCompare(b.time);
+          }
+        });
+      }
+      data.reverse();
+      for (var i = 0; i < 3 && data.length > 0; i++) {
+        data.pop();
+      }
+      var eventsContainer = document.getElementById("eventsContainer");
+      if (data.length > 0) {
+        eventsContainer.innerHTML = data.map(function(item) {
+          return `
+            <div class="event-box">
+              <h2>${item.name}</h2>
+              <p><i class="fas fa-map-marker-alt"></i> ${item.address}</p>
+              <p><i class="fas fa-clock"></i> ${item.time}</p>
+              <p><i class="fas fa-calendar-alt"></i> ${item.date}</p>
+              <p>${item.description}</p>
+              <div class="map-container">
+                <iframe class="map"
+                        width="100%"
+                        height="100%"
+                        style="border:0;"
+                        loading="lazy"
+                        allowfullscreen
+                        referrerpolicy="no-referrer-when-downgrade"
+                        src="https://www.google.com/maps/embed/v1/place?key=AIzaSyCHJTgseMnVwDvJyvKCQXjPlUCvPhDS8X0&q=${encodeURI(item.address)}">
+                </iframe>
+              </div>
+            </div>`;
+        }).join("");
+      } else {
+        eventsContainer.innerHTML = "<p style='text-align:center;color:#aaa;'>No service opportunities found.</p>";
+      }
+    }
+    const GEMINI_API_KEY = "AIzaSyC1PPQQsmjXXMrluP8ITlkID-Qc_grWLVE";
+
+async function askAI() {
+  const queryInput  = document.getElementById("aiQuery");
+  const responseDiv = document.getElementById("aiResponse");
+  const query       = queryInput.value.trim();
+
+  if (!query) {
+    responseDiv.innerHTML = "<p>Please enter a query.</p>";
+    return;
+  }
+  responseDiv.textContent = "Generating recommendation…";
+
+  try {
+    const endpoint =
+      `https://generativelanguage.googleapis.com/v1beta/models/` +
+      `gemini-2.0-flash:generateContent?key=${GEMINI_API_KEY}`;
+
+    const res = await fetch(endpoint, {
+      method : "POST",
+      headers: { "Content-Type": "application/json" },
+      body   : JSON.stringify({
+        contents: [{
+          parts: [{
+            text:
+              `You are an expert volunteer advisor. ` +
+              `Suggest suitable volunteer opportunities for: "${query}".`
+          }]
+        }],
+        generationConfig: { temperature: 0.8, maxOutputTokens: 512 }
+      })
+    });
+
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.error?.message || res.statusText);
+
+    const answer =
+      data.candidates?.[0]?.content?.parts?.[0]?.text?.trim() ||
+      "No recommendation available.";
+
+      const markdown = data.candidates?.[0]?.content?.parts?.[0]?.text || "";
+const html     = DOMPurify.sanitize(marked.parse(markdown));   // ✨
+
+responseDiv.innerHTML =
+  `<h3>AI Recommendation</h3>${html}`;
+  } catch (err) {
+    responseDiv.innerHTML =
+      `<p>Sorry, an error occurred: ${err.message}</p>`;
+  }
+}
+
+  </script>
+  <!-- Markdown → HTML -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/marked/15.0.7/marked.min.js"
+integrity="sha512-...sha256..." crossorigin="anonymous"></script>
+
+<!-- (Recommended) sanitize the HTML that comes back -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/3.0.2/purify.min.js"
+integrity="sha512-...sha256..." crossorigin="anonymous"></script>
+
+</head>
+<body>
+  <!-- Navbar Container -->
+  <div class="navbar-container">
+    <div class="navigation">
+      <a href="login.html">LOG OUT</a>
+      <a href="home.html">HOME</a>
+      <a href="search.html" class="active">SEARCH</a>
+      <a href="profile.html">PROFILE</a>
+    </div>
+    <div class="welcome-text-container">
+      <span id="welcomeText" class="welcome-text"></span>
+    </div>
+  </div>
+  
+  <!-- Banner Image Section -->
+  <div class="banner">
+    <img src="https://cellius-1.github.io/thernel.github.io/images/pi.png" alt="VoluNet Banner" />
+  </div>
+  
+  <!-- Hero Banner Section -->
+  <div class="hero">
+    <div class="hero-content">
+      <h1>Find Your Next Opportunity</h1>
+      <p>Search for volunteer positions and make a difference in your community.</p>
+    </div>
+  </div>
+  
+  <!-- Feature Description Section -->
+  <div class="features-section">
+    <h2>Why Use VoluNet Search?</h2>
+    <div class="features-container">
+      <div class="feature-card">
+        <i class="fas fa-filter"></i>
+        <h3>Advanced Filters</h3>
+        <p>Narrow down your search by date, time, and location effortlessly.</p>
+      </div>
+      <div class="feature-card">
+        <i class="fas fa-bolt"></i>
+        <h3>Real-Time Updates</h3>
+        <p>Get live data on opportunities as they become available.</p>
+      </div>
+      <div class="feature-card">
+        <i class="fas fa-thumbs-up"></i>
+        <h3>Easy To Use</h3>
+        <p>An intuitive interface designed with volunteers in mind.</p>
+      </div>
+      <div class="feature-card">
+        <i class="fas fa-lightbulb"></i>
+        <h3>Smart Insights</h3>
+        <p>Leverage AI for personalized volunteer recommendations.</p>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Main Container (Filter & Events) -->
+  <div class="main-container">
+    <!-- Filter Section -->
+    <div class="filter-section">
+      <input type="text" id="searchTerm" placeholder="Search by name or address" />
+      <select id="sortOption">
+        <option value="">Sort By</option>
+        <option value="date">Date</option>
+        <option value="time">Time</option>
+      </select>
+      <button onclick="applyFilters()">Apply Filters</button>
+      <button onclick="resetEvents()">Reset Events</button>
+    </div>
+    
+    <!-- Events Container -->
+    <div class="events-container" id="eventsContainer">
+      <!-- Events are dynamically inserted here -->
+    </div>
+  </div>
+  
+  <!-- AI Volunteer Advisor Section -->
+  <div class="ai-section">
+    <h2>AI Volunteer Advisor</h2>
+    <p>Not sure which volunteer opportunity suits your needs? Ask our AI Volunteer Advisor for personalized suggestions!</p>
+    <div>
+      <input type="text" id="aiQuery" placeholder="Enter your query" />
+      <button onclick="askAI()">Ask AI</button>
+    </div>
+    <div id="aiResponse" class="ai-response"></div>
+  </div>
+  
+  <!-- Call-To-Action (CTA) Section for Requesting Volunteers -->
+  <div class="cta-section">
+    <div class="cta-content">
+      <h2>Need Volunteers? Request Them Now!</h2>
+      <p>Our network of dedicated volunteers is just a click away. Let us help you find the support you need for your service opportunities.</p>
+      <button onclick="createServiceOpportunity(event)" class="cta-button">Request Volunteers</button>
+    </div>
+  </div>
+  
+  <!-- Footer -->
+  <div class="footer">
+    <p>&copy; 2025 Volunet. All rights reserved.</p>
+  </div>
+</body>
+</html>

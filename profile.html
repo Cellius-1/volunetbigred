@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VoluNet - Profile</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Radio+Canada+Big:ital,wght@0,400..700;1,400..700&family=Six+Caps&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* --- Overall Base Styles --- */
+    body {
+      font-family: 'Radio Canada Big', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #000;
+      color: white;
+    }
+    .header, .navbar-container, .footer {
+      width: 100%;
+    }
+    
+    /* --- Hero Section --- */
+    .hero-profile {
+      background: url('https://fjwp.s3.amazonaws.com/blog/wp-content/uploads/2020/10/15153848/The-Career-Benefits-of-Volunteering-During-Your-Job-Search-2.jpg') center/cover no-repeat;
+      height: 40vh;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+    .hero-profile::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0, 0, 0, 0.6);
+    }
+    .hero-profile h1 {
+      position: relative;
+      font-size: 3em;
+      color: white;
+      animation: fadeIn 2s ease-out forwards;
+      margin: 0;
+    }
+    @keyframes fadeIn {
+      0% { opacity: 0; transform: translateY(-20px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+    
+    /* --- Profile Container --- */
+    .profile-container {
+      max-width: 900px;
+      margin: 30px auto;
+      padding: 20px;
+      background: rgba(0, 0, 0, 0.1);
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+    }
+    
+    /* --- Profile Card --- */
+    .profile-card {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      border-bottom: 1px solid rgba(255,255,255,0.2);
+    }
+    .profile-img {
+      flex: 0 0 150px;
+      text-align: center;
+    }
+    .profile-img img {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      border: 3px solid white;
+    }
+    .profile-info {
+      flex: 1;
+      text-align: left;
+      min-width: 250px;
+    }
+    .profile-info h2 {
+      font-family: 'Six Caps', sans-serif;
+      font-size: 2.5em;
+      margin: 0 0 10px;
+    }
+    .profile-info p {
+      font-size: 1.1em;
+      line-height: 1.5;
+      margin: 0;
+    }
+    
+    /* --- Profile Stats --- */
+    .profile-stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+      text-align: center;
+      padding: 10px 20px;
+    }
+    .profile-stat h3 {
+      font-family: 'Six Caps', sans-serif;
+      font-size: 2em;
+      margin: 0 0 5px;
+    }
+    .profile-stat p {
+      margin: 0;
+      font-size: 1.2em;
+    }
+    
+    /* --- Edit Profile Button --- */
+    .edit-button {
+      display: block;
+      width: 220px;
+      margin: 0 auto;
+      padding: 12px;
+      text-align: center;
+      border: 2px solid white;
+      border-radius: 25px;
+      background: transparent;
+      color: white;
+      font-family: 'Six Caps', sans-serif;
+      font-size: 1.1em;
+      text-decoration: none;
+      cursor: pointer;
+      transition: background 0.3s ease, color 0.3s ease;
+    }
+    .edit-button:hover {
+      background: white;
+      color: black;
+    }
+    
+    /* --- Volunteer Log Section --- */
+    .volunteer-log {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      padding: 20px;
+      border-top: 1px solid rgba(255,255,255,0.2);
+    }
+    .search-box {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .search-box input[type="text"] {
+      padding: 10px;
+      border: none;
+      border-radius: 20px;
+      font-family: 'Radio Canada Big', sans-serif;
+      transition: all 0.3s ease;
+      outline: none;
+      width: 220px;
+      background-color: rgba(255,255,255,0.2);
+      color: white;
+    }
+    .search-box input::placeholder { color: white; }
+    .search-box button {
+      padding: 10px 20px;
+      border: none;
+      border-radius: 20px;
+      font-family: 'Radio Canada Big', sans-serif;
+      background-color: transparent;
+      color: white;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+    .search-box button:hover {
+      background-color: rgba(255,255,255,0.2);
+    }
+    .total-hours {
+      text-align: center;
+      font-size: 2em;
+      margin-bottom: 10px;
+    }
+    .total-hours span { font-family: 'Six Caps', sans-serif; }
+    .progress-bar {
+      width: 100%;
+      background-color: rgba(255,255,255,0.2);
+      border-radius: 20px;
+      overflow: hidden;
+      margin: 0 auto;
+    }
+    .progress-bar-fill {
+      height: 20px;
+      background-color: #4CAF50;
+      width: 0%;
+      transition: width 2s;
+      text-align: right;
+      line-height: 20px;
+      font-size: 14px;
+      color: black;
+      padding-right: 5px;
+    }
+    .diary {
+      margin-top: 20px;
+    }
+    .diary h2 {
+      font-family: 'Six Caps', sans-serif;
+      font-size: 2em;
+      margin-bottom: 10px;
+      text-align: center;
+    }
+    .diary-entry {
+      background-color: rgba(255,255,255,0.1);
+      border-radius: 10px;
+      padding: 10px 20px;
+      margin-bottom: 10px;
+      animation: fadeIn 1s ease-in-out;
+    }
+    .diary-input {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: center;
+    }
+    .diary-input input[type="text"],
+    .diary-input input[type="date"] {
+      padding: 10px;
+      border: none;
+      border-radius: 20px;
+      font-family: 'Radio Canada Big', sans-serif;
+      transition: all 0.3s ease;
+      outline: none;
+      width: 220px;
+      background-color: rgba(255,255,255,0.2);
+      color: white;
+    }
+    .diary-input button {
+      padding: 10px 20px;
+      border: none;
+      border-radius: 20px;
+      font-family: 'Radio Canada Big', sans-serif;
+      background-color: transparent;
+      color: white;
+      transition: background 0.3s ease;
+      cursor: pointer;
+    }
+    .diary-input button:hover {
+      background-color: rgba(255,255,255,0.2);
+    }
+  </style>
+  <script>
+    var totalVolunteerHours = 0;
+    document.addEventListener("DOMContentLoaded", function() {
+      // Retrieve username from localStorage or use default
+      var username = localStorage.getItem("username") || "Volunteer";
+      document.getElementById("usernameDisplay").textContent = username.toUpperCase();
+      
+      // Dummy stats – replace with dynamic values as needed
+      document.getElementById("hoursStat").textContent = "150";
+      document.getElementById("opportunitiesStat").textContent = "12";
+      document.getElementById("impactStat").textContent = "75%";
+      
+      animateProgressBar();
+    });
+    
+    function submitHours() {
+      var hoursInput = parseInt(document.getElementById("volunteerHours").value);
+      var totalHoursElement = document.getElementById("totalHours");
+      var progressBarFill = document.getElementById("progressBarFill");
+      var targetHours = 100; // Target volunteer hours
+      
+      if (!isNaN(hoursInput) && hoursInput > 0) {
+        totalVolunteerHours += hoursInput;
+        if (totalVolunteerHours > targetHours) {
+          totalVolunteerHours = hoursInput;
+        }
+        totalHoursElement.textContent = totalVolunteerHours;
+        var percentComplete = (totalVolunteerHours / targetHours) * 100;
+        progressBarFill.style.width = percentComplete + "%";
+        progressBarFill.textContent = percentComplete.toFixed(2) + "%";
+      } else {
+        totalHoursElement.textContent = "Error: Please enter a valid number";
+        totalHoursElement.style.color = "red";
+      }
+    }
+    
+    function animateProgressBar() {
+      var progressBarFill = document.getElementById("progressBarFill");
+      var targetHours = 100;
+      var percentComplete = (totalVolunteerHours / targetHours) * 100;
+      progressBarFill.style.width = percentComplete + "%";
+      progressBarFill.textContent = percentComplete.toFixed(2) + "%";
+    }
+    
+    function addDiaryEntry() {
+      var locationName = document.getElementById("locationName").value;
+      var volunteerDate = document.getElementById("volunteerDate").value;
+      var diaryEntries = document.getElementById("diaryEntries");
+      
+      if (locationName.trim() !== "" && volunteerDate.trim() !== "") {
+        var entryDiv = document.createElement("div");
+        entryDiv.classList.add("diary-entry");
+        var entryContent = "<p><strong>Location:</strong> " + locationName + "</p>";
+        entryContent += "<p><strong>Date:</strong> " + volunteerDate + "</p>";
+        entryDiv.innerHTML = entryContent;
+        diaryEntries.appendChild(entryDiv);
+        document.getElementById("locationName").value = "";
+        document.getElementById("volunteerDate").value = "";
+      } else {
+        alert("Please enter location name and date.");
+      }
+    }
+  </script>
+</head>
+<body>
+  <!-- Header -->
+  <div class="header">
+    <img src="volunetlogosquare.png" alt="VoluNet Logo">
+  </div>
+  <div class="navbar-container">
+    <div class="navigation">
+      <a href="home.html">HOME</a>
+      <a href="search.html">SEARCH</a>
+      <a href="profile.html">PROFILE</a>
+      <a href="login.html">LOG OUT</a>
+    </div>
+    <div class="welcome-text-container">
+      <span id="welcomeText" class="welcome-text"></span>
+    </div>
+  </div>
+  
+  <!-- Hero Section -->
+  <div class="hero-profile">
+    <h1>Your Profile</h1>
+  </div>
+  
+  <!-- Profile Container -->
+  <div class="profile-container">
+    <!-- Profile Card -->
+    <div class="profile-card">
+      <div class="profile-img">
+        <img src="volunetlogosquare.png" alt="Profile Picture">
+      </div>
+      <div class="profile-info">
+        <h2 id="usernameDisplay">VOLUNTEER</h2>
+        <p>Welcome to your personal dashboard. Here you can view your volunteer achievements, track your hours, and explore your contributions to the community. Keep up the great work and continue making a difference!</p>
+      </div>
+    </div>
+    
+    <!-- Profile Stats -->
+    <div class="profile-stats">
+      <div class="profile-stat">
+        <h3 id="hoursStat">0</h3>
+        <p>Hours Volunteered</p>
+      </div>
+      <div class="profile-stat">
+        <h3 id="opportunitiesStat">0</h3>
+        <p>Opportunities</p>
+      </div>
+      <div class="profile-stat">
+        <h3 id="impactStat">0%</h3>
+        <p>Community Impact</p>
+      </div>
+    </div>
+    
+    <!-- Edit Profile Button -->
+    <a href="edit-profile.html" class="edit-button">Edit Profile</a>
+    
+    <!-- Volunteer Log Section -->
+    <div class="volunteer-log">
+      <div class="search-box">
+        <input type="text" id="volunteerHours" placeholder="Insert volunteer hours">
+        <button onclick="submitHours()">Submit</button>
+      </div>
+      <div class="total-hours">
+        Total volunteer hours: <span id="totalHours">0</span>
+      </div>
+      <div class="progress-bar">
+        <div class="progress-bar-fill" id="progressBarFill"></div>
+      </div>
+      <div class="diary">
+        <h2>Diary Entries</h2>
+        <div id="diaryEntries"></div>
+      </div>
+      <div class="diary-input">
+        <input type="text" id="locationName" placeholder="Location Name">
+        <input type="date" id="volunteerDate">
+        <button onclick="addDiaryEntry()">Add Entry</button>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Footer -->
+  <div class="footer">
+    <p>&copy; 2025 Volunet. All rights reserved.</p>
+  </div>
+</body>
+</html>
